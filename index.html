@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UEICube</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+      body {
+        font-family: "Outfit", sans-serif;
+        font-weight: 300;
+        background-color: #001321;
+      }
+      .container {
+        width: 85%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+      .logo h1,
+      sup {
+        font-size: 1.8rem;
+        /* background: linear-gradient(
+      	135deg, #4776e6, #8e54e9
+      ); */
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 254, 254, 0.57) 25%,
+          rgba(10, 254, 254, 0.67) 75%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-background-clip: text;
+        -ms-background-clip: text;
+        margin-bottom: 0;
+      }
+      .logo sup {
+        font-size: 1.4rem;
+      }
+      .overlay {
+        background: rgba(0, 0, 0, 0.9);
+      }
+      .glow-background {
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 254, 254, 0.57) 25%,
+          rgba(255, 255, 253, 0.67) 75%
+        );
+
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-background-clip: text;
+        -ms-background-clip: text;
+      }
+      .dot {
+        cursor: pointer;
+        height: 12px;
+        width: 12px;
+        margin: 0 5px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+      }
+      .dot.active {
+        background-color: #fff;
+      }
+      .caps {
+        text-transform: uppercase;
+      }
+      .menu {
+        background: linear-gradient(
+          to left,
+          rgba(8, 77, 118, 0.57) 25%,
+          rgba(64, 27, 58, 0.67) 75%
+        );
+      }
+      .menu,
+      .mobile-menu-button {
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+      .mobile-menu {
+        transform: translateY(-100%);
+        transition: transform 0.3s ease-in-out;
+        text-transform: uppercase;
+        background: #131b47;
+        /* color: #de9ffd; */
+        color: #00fefe;
+      }
+      .mobile-menu.show {
+        transform: translateY(0);
+      }
+      .mobile-products-menu {
+        /* background: #2a324a; */
+        background: linear-gradient(
+          to bottom,
+          rgba(8, 77, 118, 0.57) 25%,
+          rgba(64, 27, 58, 0.67) 85%
+        );
+        color: #00fefe;
+      }
+      .mobile-products-menu a:hover {
+        background: #131b47;
+        border-radius: 5px;
+      }
+      .submenu {
+        display: none;
+        position: absolute;
+        /* background: #1c2841; */
+
+        background: linear-gradient(
+          to bottom,
+          rgba(8, 77, 118, 0.57) 25%,
+          rgba(64, 27, 58, 0.67) 75%
+        );
+        color: #00fefe;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #00fefe;
+      }
+      .menu-item:hover .submenu {
+        display: block;
+        min-width: 200px;
+      }
+      .submenu a:hover {
+        background: #131b47;
+        border-radius: 5px;
+      }
+      .carousel {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .carousel-slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-size: cover;
+        background-position: center;
+      }
+      .carousel-slide.active {
+        opacity: 1;
+      }
+      .hero-image {
+        position: relative;
+      }
+      .hero-image img {
+        border-radius: 10px;
+        transform: translateY(0);
+        box-shadow: var(--box-shadow);
+        transition: box-shadow 0.3s ease-in-out;
+      }
+      .hero-image:hover img {
+        transform: translateY(-10px);
+      }
+
+      /* About Section */
+      .about {
+        padding: 40px 0;
+        background-color: white;
+      }
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+        margin: 20px;
+        padding-left: 25px;
+      }
+
+      .about-text h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+      .about-text p {
+        margin-bottom: 20px;
+        color: var(--gray-color);
+      }
+      .about-list {
+        margin-top: 30px;
+      }
+      .about-list li {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+      }
+      .about-list li i {
+        color: var(--primary-color);
+        margin-right: 10px;
+      }
+      .about-image img {
+        border-radius: 10px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+      .service-grid {
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 254, 254, 0.57) 25%,
+          rgba(10, 254, 254, 0.67) 75%
+        );
+      }
+      .service-icon i {
+        font-size: 1.8rem;
+      }
+
+      @media (max-width: 768px) {
+        .about {
+          padding: 60px 0;
+        }
+
+        .about-content {
+          grid-template-columns: 1fr;
+        }
+
+        .about-image {
+          margin-bottom: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body class="relative bg-gray-100 text-gray-800">
+    <!-- Fixed Transparent Navbar -->
+    <nav
+      class="fixed top-0 left-0 w-full z-10 bg-transparent p-4 backdrop-blur-md menu"
+    >
+      <div class="container mx-auto flex justify-between items-center logo">
+        <h1
+          class="text-white text-xl font-bold glow-background drop-shadow-[0_0_10px_rgb(59,130,246)]"
+        >
+          UE I<sup>3</sup>
+        </h1>
+        <button id="menu-btn" class="md:hidden text-white text-2xl">☰</button>
+        <ul id="menu" class="hidden md:flex space-x-4 text-[#00fefe] text-sm">
+          <li>
+            <a
+              href="#"
+              class="hover:underline drop-shadow-[0_0_30px_rgb(253, 255, 0)]"
+              >Home</a
+            >
+          </li>
+          <li><a href="#" class="hover:underline">About</a></li>
+          <li class="relative menu-item">
+            <a href="#" class="hover:underline">Products</a>
+            <ul class="submenu absolute hidden text-white">
+              <li><a href="#" class="block px-4 py-2">Web Automation</a></li>
+              <li>
+                <a href="#" class="block px-4 py-2">Windows Automation</a>
+              </li>
+              <li><a href="#" class="block px-4 py-2">API Automation</a></li>
+              <li>
+                <a href="#" class="block px-4 py-2"
+                  >Image Comparision & Extraction</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li><a href="#" class="hover:underline">Services</a></li>
+          <li><a href="#" class="hover:underline">Contact</a></li>
+        </ul>
+      </div>
+      <div
+        id="mobile-menu"
+        class="absolute top-0 left-0 w-full text-white flex flex-col items-center p-5 mobile-menu md:hidden"
+      >
+        <a href="#" class="py-2 menu-item">Home</a>
+        <a href="#" class="py-2 menu-item">About</a>
+        <div class="w-full text-center">
+          <button
+            id="mobile-products-btn"
+            class="py-2 w-full mobile-menu-button"
+          >
+            Products ▼
+          </button>
+          <div
+            id="mobile-products-menu"
+            class="hidden flex flex-col mobile-products-menu"
+          >
+            <a href="#" class="py-2">Web Automation</a>
+            <a href="#" class="py-2">Windows Automation</a>
+            <a href="#" class="py-2">API Automation</a>
+            <a href="#" class="py-2 mb-1">Image Comparision & Extraction</a>
+          </div>
+        </div>
+        <a href="#" class="py-2 menu-item">Services</a>
+        <a href="#" class="py-2 menu-item">Contact</a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="carousel">
+      <div
+        class="carousel-slide active overlay"
+        style="background-image: url('assets/images/section-8.jpg')"
+      >
+        <div
+          class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-6 lg:px-20 text-white"
+        >
+          <div class="flex flex-col justify-center">
+            <h2 class="text-4xl font-bold">Web Automation</h2>
+            <p class="mt-4 text-lg">
+              Enables efficient testing across multiple browsers, automating
+              form submissions, performance checks, and validations.
+            </p>
+          </div>
+          <div>
+            <img
+              src="assets/images/slide-web-automation.jpg"
+              class="w-full rounded-lg shadow-lg"
+              alt="Slide 2 Image"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="carousel-slide"
+        style="background-image: url('assets/images/section-8.jpg')"
+      >
+        <div
+          class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-6 lg:px-20 text-white"
+        >
+          <div class="flex flex-col justify-center">
+            <h2 class="text-4xl font-bold">Windows Automation</h2>
+            <p class="mt-4 text-lg">
+              Automates desktop applications, ensuring seamless functionality,
+              UI interaction, and data validation.
+            </p>
+          </div>
+          <div>
+            <img
+              src="assets/images/slide-windows-automation.jpg"
+              class="w-full rounded-lg shadow-lg"
+              alt="Slide 3 Image"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="carousel-slide"
+        style="background-image: url('assets/images/section-8.jpg')"
+      >
+        <div
+          class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-6 lg:px-20 text-white"
+        >
+          <div class="flex flex-col justify-center">
+            <h2 class="text-4xl font-bold">API Automation</h2>
+            <p class="mt-4 text-lg">
+              Ensures API functionality, data integrity, and security with
+              automated request execution and validation.
+            </p>
+          </div>
+          <div>
+            <img
+              src="assets/images/slide-api-automation.jpg"
+              class="w-full rounded-lg shadow-lg"
+              alt="Slide 3 Image"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="carousel-slide"
+        style="background-image: url('assets/images/section-8.jpg')"
+      >
+        <div
+          class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-6 lg:px-20 text-white"
+        >
+          <div class="flex flex-col justify-center">
+            <h2 class="text-4xl font-bold">Image Comparision & Extraction</h2>
+            <p class="mt-4 text-lg">
+              Critical for healthcare and other industries, ensuring precise
+              visual validations, graphical accuracy, and compliance.
+            </p>
+          </div>
+          <div>
+            <img
+              src="assets/images/slide-image-comparision.jpg"
+              class="w-full rounded-lg shadow-lg"
+              alt="Slide 3 Image"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2"
+      >
+        <span class="dot" onclick="setSlide(0)"></span>
+        <span class="dot" onclick="setSlide(1)"></span>
+        <span class="dot" onclick="setSlide(2)"></span>
+        <span class="dot" onclick="setSlide(3)"></span>
+      </div>
+    </section>
+
+    <!-- About Us -->
+    <!-- style=" -->
+    <!-- background-image: url('assets/images/section-about.jpg'); -->
+    <!-- background-size: cover; -->
+    <!-- background-position: center; -->
+    <!-- background-repeat: no-repeat; -->
+    <!-- width: 100%; -->
+    <!-- height: 60vh;" -->
+
+    <section id="about" class="about">
+      <div class="container justify-center">
+        <div class="about-content">
+          <div class="about-image">
+            <img
+              src="assets/images/what-we-do.jpg"
+              alt="Team Working on Software"
+            />
+          </div>
+          <div class="about-text">
+            <h2>What We Do</h2>
+            <p>
+              Auto Nexus was developed by a team of expert engineers with over
+              15 years of experience in software development and business
+              solutions.
+            </p>
+            <p>
+              We provide a robust automation framework that streamlines testing
+              across web, desktop, API, and image-based applications. Our
+              solution enhances efficiency, accuracy, and scalability, enabling
+              organizations to:
+            </p>
+            <ul class="about-list">
+              <li>
+                <i class="fas fa-check"></i> Reduce manual testing efforts and
+                improve test reliability
+              </li>
+              <li>
+                <i class="fas fa-check"></i> Ensure seamless functionality
+                across multiple domains
+              </li>
+              <li>
+                <i class="fas fa-check"></i> Accelerate time-to-market with a
+                unified automation approach
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section section-services.jpg-->
+    <section
+      id="services"
+      class="py-16 text-center"
+      style="
+        background-image: url('assets/images/section-about.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 90vh;
+      "
+    >
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-6 text-white">Our Services</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 py-2">
+          <div class="p-6 bg-white rounded-lg shadow-md">
+            <div class="service-icon">
+              <i class="bi bi-browser-edge"></i>
+            </div>
+            <h3 class="text-xl font-bold">Web Development</h3>
+            <p class="mt-2">
+              Careful attention to detail and clean, well structured code
+              ensures a smooth user experience for all your visitors.
+            </p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow-md">
+            <div class="service-icon">
+              <i class="bi bi-phone"></i>
+            </div>
+            <h3 class="text-xl font-bold">App Development</h3>
+            <p class="mt-2">
+              Careful attention to detail and clean, well structured code
+              ensures a smooth user experience for all your visitors.
+            </p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow-md">
+            <div class="service-icon">
+              <i class="bi bi-aspect-ratio"></i>
+            </div>
+            <h3 class="text-xl font-bold">End-to-End V & V</h3>
+            <p class="mt-2">
+              Careful attention to detail and clean, well structured code
+              ensures a smooth user experience for all your visitors.
+            </p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow-md">
+            <div class="service-icon">
+              <i class="bi bi-headset"></i>
+            </div>
+            <h3 class="text-xl font-bold">Support</h3>
+            <p class="mt-2">
+              Careful attention to detail and clean, well structured code
+              ensures a smooth user experience for all your visitors.
+            </p>
+          </div>
+          <div class="p-6 bg-white rounded-lg shadow-md">
+            <div class="service-icon">
+              <i class="bi bi-journal-check"></i>
+            </div>
+            <h3 class="text-xl font-bold">Maintenance</h3>
+            <p class="mt-2">
+              Careful attention to detail and clean, well structured code
+              ensures a smooth user experience for all your visitors.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Us -->
+    <section id="contact" class="py-16 bg-white text-center">
+      <div class="container mx-auto px-6">
+        <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
+        <form class="max-w-md mx-auto">
+          <input
+            type="text"
+            placeholder="Your Name"
+            class="w-full p-3 border border-gray-300 rounded mb-4"
+          />
+          <input
+            type="email"
+            placeholder="Your Email"
+            class="w-full p-3 border border-gray-300 rounded mb-4"
+          />
+
+          <select
+            id="contactReason"
+            class="w-full p-3 border border-gray-300 rounded mb-4"
+            onchange="handleDropdownChange(event)"
+          >
+            <option value="" disabled selected>Select a reason</option>
+            <option value="Support">Support</option>
+            <option value="Feedback">Feedback</option>
+            <option value="Business Inquiry">Business Inquiry</option>
+            <option value="Others">Others</option>
+          </select>
+
+          <textarea
+            id="otherReason"
+            placeholder="Please specify..."
+            class="w-full p-3 border border-gray-300 rounded mb-4 hidden"
+          ></textarea>
+          <!-- 
+          <textarea
+            placeholder="Your Message"
+            class="w-full p-3 border border-gray-300 rounded mb-4"
+          ></textarea> -->
+
+          <button
+            type="submit"
+            class="bg-gray-900 text-white px-6 py-3 rounded-lg"
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <script>
+      let currentSlide = 0;
+      const slides = document.querySelectorAll(".carousel-slide");
+      const dots = document.querySelectorAll(".dot");
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === index);
+        });
+        dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }
+
+      function setSlide(index) {
+        currentIndex = index;
+        showSlide(currentIndex);
+      }
+
+      setInterval(nextSlide, 5000);
+
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const menuItems = document.querySelectorAll(".menu-item");
+      const mobileProductsBtn = document.getElementById("mobile-products-btn");
+      const mobileProductsMenu = document.getElementById(
+        "mobile-products-menu"
+      );
+
+      menuBtn.addEventListener("click", () =>
+        mobileMenu.classList.toggle("show")
+      );
+      menuItems.forEach((item) =>
+        item.addEventListener("click", () =>
+          mobileMenu.classList.remove("show")
+        )
+      );
+      document.addEventListener("click", (event) => {
+        if (
+          !mobileMenu.contains(event.target) &&
+          !menuBtn.contains(event.target)
+        ) {
+          mobileMenu.classList.remove("show");
+        }
+      });
+      mobileProductsBtn.addEventListener("click", () =>
+        mobileProductsMenu.classList.toggle("hidden")
+      );
+
+      function handleDropdownChange(event) {
+        const otherReasonField = document.getElementById("otherReason");
+        if (event.target.value === "Others") {
+          otherReasonField.classList.remove("hidden");
+        } else {
+          otherReasonField.classList.add("hidden");
+        }
+      }
+    </script>
+  </body>
+</html>
