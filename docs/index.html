@@ -690,7 +690,57 @@
           here to assist you.
         </p>
         <h4 class="text-1xl font-bold mb-6">Get in Touch</h4>
-        <form class="max-w-md mx-auto">
+        <form id="contactForm" class="max-w-md mx-auto">
+          <input
+            id="name"
+            type="text"
+            placeholder="Your Name"
+            class="w-full p-3 border border-gray-300 rounded mb-4"
+            required
+          />
+          <input
+            id="email"
+            type="email"
+            placeholder="Your Email"
+            class="w-full p-3 border border-gray-300 rounded mb-4"
+            required
+          />
+
+          <select
+            id="contactReason"
+            class="w-full p-3 border border-gray-300 rounded mb-4"
+            onchange="handleDropdownChange(event)"
+            required
+          >
+            <option value="" disabled selected>Reason for Contact</option>
+            <option value="Support">Support</option>
+            <option value="Feedback">Feedback</option>
+            <option value="Business Inquiry">Business Inquiry</option>
+            <option value="Others">Others</option>
+          </select>
+
+          <textarea
+            id="otherReason"
+            placeholder="Please specify..."
+            class="w-full p-3 border border-gray-300 rounded mb-4 hidden"
+          ></textarea>
+
+          <textarea
+            id="message"
+            placeholder="Your Message"
+            class="w-full p-3 border border-gray-300 rounded mb-4 hidden"
+            required
+          ></textarea>
+
+          <button
+            type="submit"
+            class="bg-gray-900 text-white px-6 py-3 rounded-lg"
+          >
+            Send Message
+          </button>
+        </form>
+
+        <!-- <form class="max-w-md mx-auto">
           <input
             type="text"
             placeholder="Your Name"
@@ -726,7 +776,7 @@
           >
             Send Message
           </button>
-        </form>
+        </form> -->
       </div>
     </section>
 
@@ -782,12 +832,62 @@
         mobileProductsMenu.classList.toggle("hidden")
       );
 
+      // function handleDropdownChange(event) {
+      //   const otherReasonField = document.getElementById("otherReason");
+      //   if (event.target.value === "Others") {
+      //     otherReasonField.classList.remove("hidden");
+      //   } else {
+      //     otherReasonField.classList.add("hidden");
+      //   }
+      // }
+
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const contactReason = document.getElementById("contactReason").value;
+          const otherReason =
+            contactReason === "Others"
+              ? document.getElementById("otherReason").value
+              : "";
+          const message = document.getElementById("message").value;
+
+          fetch(
+            "https://script.google.com/macros/s/AKfycbzxZaGrHdiME1CetCoOD4vuc5osj_97Jpi3ugHELz3fHivEOh3NBv60oi8P7M4pQX32/exec",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              mode: "no-cors",
+              body: JSON.stringify({
+                name,
+                email,
+                contactReason,
+                otherReason,
+                message,
+              }),
+            }
+          )
+            .then((response) => response.text())
+            .then((data) => {
+              alert("Message Sent Successfully!");
+              document.getElementById("contactForm").reset();
+              document.getElementById("otherReason").classList.add("hidden");
+            })
+            .catch((error) => alert("Error sending message: " + error));
+        });
+
+      // Show/Hide the "Other" reason field when "Others" is selected
       function handleDropdownChange(event) {
         const otherReasonField = document.getElementById("otherReason");
         if (event.target.value === "Others") {
           otherReasonField.classList.remove("hidden");
+          otherReasonField.setAttribute("required", "true");
         } else {
           otherReasonField.classList.add("hidden");
+          otherReasonField.removeAttribute("required");
         }
       }
     </script>
