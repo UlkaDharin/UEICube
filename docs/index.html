@@ -52,6 +52,98 @@
       .overlay {
         background: rgba(0, 0, 0, 0.9);
       }
+
+      /*.overlay-slide-image {
+        position: relative; 
+        display: block;
+      }*/
+
+      /* .overlay-slide-image::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 254, 254, 0.57) 25%,
+          rgba(10, 254, 254, 0.67) 75%
+        );
+        backdrop-filter: blur(10px); 
+        -webkit-backdrop-filter: blur(10px); 
+        border-radius: inherit; 
+        z-index: 1;
+      }*/
+      .overlay-slide-image {
+        position: relative;
+        display: block;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 30px 40px rgba(0, 0, 0, 0.5);
+      }
+      /*.overlay-slide-image::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(1px);
+        -webkit-backdrop-filter: blur(1px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 1;
+        transition: opacity 0.3s ease-in-out;
+      }*/
+      /* .overlay-image img {
+        transform: scale(1.2);
+        transition: transform 1s ease-in-out;
+      }
+      .overlay-image:hover img {
+        transform: scale(1.2);
+      } */
+
+      /*@keyframes moveForward {
+        0% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(1.2);
+        }
+      }
+
+      .overlay-image img {
+        animation: moveForward 3s infinite alternate ease-in-out;
+      }*/
+
+      .image-container {
+        position: relative;
+        display: inline-block;
+        width: 600px;
+        height: 500px;
+        overflow: hidden;
+        border-radius: 10px; /* Optional rounded corners */
+      }
+      .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .image-container:hover .overlay {
+        opacity: 1; /* Show overlay on hover */
+      }
+
+      .overlay-text {
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+      }
       .glow-background {
         background: linear-gradient(
           to bottom,
@@ -175,7 +267,7 @@
 
       /* About Section */
       .about {
-        padding: 40px 0;
+        padding: 20px 0;
         background-color: white;
       }
       .about-content {
@@ -183,7 +275,7 @@
         grid-template-columns: 1fr 1fr;
         gap: 50px;
         align-items: center;
-        margin: 20px;
+        /* margin: 20px; */
         padding-left: 25px;
       }
 
@@ -223,7 +315,7 @@
       }
       .services-section {
         /* margin-bottom: 10; */
-        background-image: url("assets/images/section-about.jpg");
+        background-image: url("assets/images/dark_blue_gradient_background.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -237,10 +329,12 @@
 
         .about-content {
           grid-template-columns: 1fr;
+          gap: 2px;
+          padding-left: 5px;
         }
 
         .about-image {
-          margin-bottom: 30px;
+          margin-bottom: 10px;
         }
         /* .services-section {
           margin-bottom: 50;
@@ -320,23 +414,26 @@
     <!-- Hero Section -->
     <section class="carousel">
       <div
-        class="carousel-slide active overlay"
-        style="background-image: url('assets/images/section-8.jpg')"
+        class="carousel-slide overlay"
+        style="background-image: url('assets/images/banner-2.jpg')"
       >
         <div
           class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-6 lg:px-20 text-white"
         >
           <div class="flex flex-col justify-center">
-            <h2 class="text-4xl font-bold">Web Automation</h2>
-            <p class="mt-4 text-lg">
-              Enables efficient testing across multiple browsers, automating
-              form submissions, performance checks, and validations.
+            <h2 class="text-3xl lg:text-5xl font-bold">Our Framework</h2>
+            <p class="mt-4 text-sm md:text-2xl lg:text-2xl">
+              A comprehensive, unified testing framework designed for Web,
+              Windows, and API automation. Compatible across multiple platforms
+              and technologies, our framework prioritizes reusability,
+              maintainability, and efficiency, ensuring seamless integration
+              into diverse development environments.
             </p>
           </div>
-          <div>
+          <div class="overlay-slide-image">
             <img
-              src="assets/images/slide-web-automation.jpg"
-              class="w-full rounded-lg shadow-lg"
+              src="assets/images/slide-automation.jpg"
+              class="w-full sm:h-60 md:h-80 lg:h-120 rounded-lg shadow-lg"
               alt="Slide 2 Image"
             />
           </div>
@@ -344,22 +441,51 @@
       </div>
       <div
         class="carousel-slide"
-        style="background-image: url('assets/images/section-8.jpg')"
+        style="background-image: url('assets/images/banner-2.jpg')"
       >
         <div
           class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-6 lg:px-20 text-white"
         >
           <div class="flex flex-col justify-center">
-            <h2 class="text-4xl font-bold">Windows Automation</h2>
-            <p class="mt-4 text-lg">
-              Automates desktop applications, ensuring seamless functionality,
-              UI interaction, and data validation.
+            <h2 class="text-3xl lg:text-5xl font-bold">Our Core Services</h2>
+            <p class="mt-4 text-sm md:text-2xl lg:text-2xl">
+              We specialize in designing and developing high-performance,
+              secure, and scalable applications. Our expertise spans across
+              mobile, standalone, and web applications, delivering tailored
+              solutions that align with your business needs.
             </p>
           </div>
-          <div>
+          <div class="overlay-slide-image">
             <img
-              src="assets/images/slide-windows-automation.jpg"
-              class="w-full rounded-lg shadow-lg"
+              src="assets/images/slide-design-development.jpg"
+              class="w-full sm:h-60 md:h-80 lg:h-120 rounded-lg shadow-lg overlay"
+              alt="Slide 2 Image"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="carousel-slide"
+        style="background-image: url('assets/images/banner-2.jpg')"
+      >
+        <div
+          class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-6 lg:px-20 text-white"
+        >
+          <div class="flex flex-col justify-center">
+            <h2 class="text-3xl lg:text-5xl font-bold">
+              Support & Maintenance
+            </h2>
+            <p class="mt-4 text-sm md:text-2xl lg:text-2xl">
+              We offer continuous support and maintenance services, ensuring
+              optimal performance, security, and compliance. Our solutions cater
+              to critical industries such as healthcare, where precision and
+              reliability are paramount.
+            </p>
+          </div>
+          <div class="overlay-slide-image">
+            <img
+              src="assets/images/slide-support-maintenance.jpg"
+              class="w-full sm:h-60 md:h-80 lg:h-120 rounded-lg shadow-lg"
               alt="Slide 3 Image"
             />
           </div>
@@ -367,51 +493,58 @@
       </div>
       <div
         class="carousel-slide"
-        style="background-image: url('assets/images/section-8.jpg')"
+        style="background-image: url('assets/images/banner-2.jpg')"
       >
         <div
           class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-6 lg:px-20 text-white"
         >
           <div class="flex flex-col justify-center">
-            <h2 class="text-4xl font-bold">API Automation</h2>
-            <p class="mt-4 text-lg">
-              Ensures API functionality, data integrity, and security with
-              automated request execution and validation.
+            <h2 class="text-3xl lg:text-5xl font-bold">
+              End-End Verification and Validation
+            </h2>
+            <p class="mt-4 text-sm md:text-2xl lg:text-2xl">
+              Our verification and validation services ensure compliance,
+              graphical accuracy, and precise visual validations. We cater to
+              industries requiring rigorous testing standards, providing
+              reliability and quality assurance at every stage.
             </p>
           </div>
-          <div>
+          <div class="overlay-slide-image">
             <img
-              src="assets/images/slide-api-automation.jpg"
-              class="w-full rounded-lg shadow-lg"
+              src="assets/images/slide-e2e-vandv.jpg"
+              class="w-full sm:h-60 md:h-80 lg:h-120 rounded-lg shadow-lg"
               alt="Slide 3 Image"
             />
           </div>
         </div>
       </div>
       <div
-        class="carousel-slide"
-        style="background-image: url('assets/images/section-8.jpg')"
+        class="carousel-slide active"
+        style="background-image: url('assets/images/banner-2.jpg')"
       >
         <div
           class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-6 lg:px-20 text-white"
         >
           <div class="flex flex-col justify-center">
-            <h2 class="text-4xl font-bold">Image Comparision & Extraction</h2>
-            <p class="mt-4 text-lg">
-              Critical for healthcare and other industries, ensuring precise
-              visual validations, graphical accuracy, and compliance.
+            <h2 class="text-3xl lg:text-5xl font-bold">
+              Image Comparision & Extraction
+            </h2>
+            <p class="mt-4 text-sm md:text-2xl lg:text-2xl">
+              Leveraging advanced image processing techniques, we offer image
+              comparison and extraction solutions critical for industries
+              requiring high precision and compliance, such as healthcare and
+              security.
             </p>
           </div>
-          <div>
+          <div class="overlay-slide-image">
             <img
               src="assets/images/slide-image-comparision.jpg"
-              class="w-full rounded-lg shadow-lg"
+              class="w-full h-70 md:h-80 lg:h-120 rounded-lg shadow-lg"
               alt="Slide 3 Image"
             />
           </div>
         </div>
       </div>
-
       <div
         class="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2"
       >
@@ -419,6 +552,7 @@
         <span class="dot" onclick="setSlide(1)"></span>
         <span class="dot" onclick="setSlide(2)"></span>
         <span class="dot" onclick="setSlide(3)"></span>
+        <span class="dot" onclick="setSlide(4)"></span>
       </div>
     </section>
 
@@ -436,35 +570,48 @@
         <div class="about-content">
           <div class="about-image">
             <img
-              src="assets/images/what-we-do.jpg"
+              src="assets/images/who-we-are.jpg"
               alt="Team Working on Software"
             />
           </div>
           <div class="about-text">
-            <h2>What We Do</h2>
+            <h2>Who We Are</h2>
             <p>
-              Auto Nexus was developed by a team of expert engineers with over
-              15 years of experience in software development and business
-              solutions.
-            </p>
-            <p>
-              We provide a robust automation framework that streamlines testing
-              across web, desktop, API, and image-based applications. Our
-              solution enhances efficiency, accuracy, and scalability, enabling
-              organizations to:
+              We are a team of highly skilled professionals with extensive
+              expertise across multiple domains:
             </p>
             <ul class="about-list">
               <li>
-                <i class="fas fa-check"></i> Reduce manual testing efforts and
-                improve test reliability
+                <i class="fas fa-check"></i> 10+ years of experience in .NET
+                technologies, specializing in development and framework design.
               </li>
               <li>
-                <i class="fas fa-check"></i> Ensure seamless functionality
-                across multiple domains
+                <i class="fas fa-check"></i> Deep healthcare domain knowledge,
+                with hands-on experience in Verification & Validation (V&V)
+                across various tools
               </li>
               <li>
-                <i class="fas fa-check"></i> Accelerate time-to-market with a
-                unified automation approach
+                <i class="fas fa-check"></i> Proven expertise in web design &
+                development, combining creativity with technical excellence.
+              </li>
+              <li>
+                <i class="fas fa-check"></i> Expertise in web design and
+                development, blending technical excellence with innovative
+                design.
+              </li>
+              <li>
+                <i class="fas fa-check"></i> Adaptability to diverse technology
+                stacks, ensuring high-quality solutions with quick learning and
+                seamless execution.
+              </li>
+              <li>
+                <i class="fas fa-check"></i> Cross-industry experience,
+                delivering flexible, scalable, and cutting-edge solutions.
+              </li>
+              <li>
+                <i class="fas fa-check"></i> A commitment to innovation, with a
+                passion for tackling challenges across technology and business
+                domains.
               </li>
             </ul>
           </div>
@@ -483,8 +630,9 @@
             </div>
             <h3 class="text-xl font-bold">Web Development</h3>
             <p class="mt-2">
-              Careful attention to detail and clean, well-structured code
-              ensures a smooth user experience for all your visitors.
+              We create intuitive, responsive, and high-performance web
+              applications using cutting-edge technologies, ensuring seamless
+              user experiences.
             </p>
           </div>
           <div class="p-6 bg-white rounded-lg shadow-md">
@@ -493,8 +641,8 @@
             </div>
             <h3 class="text-xl font-bold">App Development</h3>
             <p class="mt-2">
-              Careful attention to detail and clean, well-structured code
-              ensures a smooth user experience for all your visitors.
+              Our expertise in mobile and standalone applications ensures
+              robust, scalable, and secure solutions tailored to business needs.
             </p>
           </div>
           <div class="p-6 bg-white rounded-lg shadow-md">
@@ -503,8 +651,9 @@
             </div>
             <h3 class="text-xl font-bold">End-to-End V & V</h3>
             <p class="mt-2">
-              Careful attention to detail and clean, well-structured code
-              ensures a smooth user experience for all your visitors.
+              We provide meticulous testing solutions to ensure compliance,
+              accuracy, and reliability across industries with high regulatory
+              standards.
             </p>
           </div>
           <div class="p-6 bg-white rounded-lg shadow-md">
@@ -513,8 +662,8 @@
             </div>
             <h3 class="text-xl font-bold">Support</h3>
             <p class="mt-2">
-              Careful attention to detail and clean, well-structured code
-              ensures a smooth user experience for all your visitors.
+              Our dedicated support team ensures continuous system monitoring,
+              quick issue resolution, and optimal software performance.
             </p>
           </div>
           <div class="p-6 bg-white rounded-lg shadow-md">
@@ -523,8 +672,9 @@
             </div>
             <h3 class="text-xl font-bold">Maintenance</h3>
             <p class="mt-2">
-              Careful attention to detail and clean, well-structured code
-              ensures a smooth user experience for all your visitors.
+              We offer proactive maintenance solutions to enhance system
+              longevity, security, and efficiency, reducing downtime and
+              operational risks.
             </p>
           </div>
         </div>
@@ -535,6 +685,11 @@
     <section id="contact" class="py-16 bg-white text-center mt-1">
       <div class="container mx-auto px-6">
         <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
+        <p class="mb-6">
+          Reach out to us for inquiries, support, or collaboration. Our team is
+          here to assist you.
+        </p>
+        <h4 class="text-1xl font-bold mb-6">Get in Touch</h4>
         <form class="max-w-md mx-auto">
           <input
             type="text"
@@ -552,7 +707,7 @@
             class="w-full p-3 border border-gray-300 rounded mb-4"
             onchange="handleDropdownChange(event)"
           >
-            <option value="" disabled selected>Select a reason</option>
+            <option value="" disabled selected>Reason for Contact</option>
             <option value="Support">Support</option>
             <option value="Feedback">Feedback</option>
             <option value="Business Inquiry">Business Inquiry</option>
@@ -597,7 +752,7 @@
         showSlide(currentIndex);
       }
 
-      setInterval(nextSlide, 5000);
+      //setInterval(nextSlide, 5000);
 
       const menuBtn = document.getElementById("menu-btn");
       const mobileMenu = document.getElementById("mobile-menu");
