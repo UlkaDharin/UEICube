@@ -34,11 +34,17 @@
         /* background: linear-gradient(
       	135deg, #4776e6, #8e54e9
       ); */
-        background: linear-gradient(
+        /*background: linear-gradient(
           to bottom,
           rgba(0, 254, 254, 0.57) 25%,
           rgba(10, 254, 254, 0.67) 75%
-        );
+        );*/
+        background: rgba(255, 140, 0, 0.67);
+        /* linear-gradient(
+          to bottom,
+          rgba(255, 165, 0, 0.57) 25%,
+          rgba(255, 140, 0, 0.67) 75%
+        );*/
         background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -54,7 +60,7 @@
       }
 
       /*.overlay-slide-image {
-        position: relative; 
+        position: relative;
         display: block;
       }*/
 
@@ -70,9 +76,9 @@
           rgba(0, 254, 254, 0.57) 25%,
           rgba(10, 254, 254, 0.67) 75%
         );
-        backdrop-filter: blur(10px); 
-        -webkit-backdrop-filter: blur(10px); 
-        border-radius: inherit; 
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: inherit;
         z-index: 1;
       }*/
       .overlay-slide-image {
@@ -349,11 +355,7 @@
       class="fixed top-0 left-0 w-full z-10 bg-transparent p-4 backdrop-blur-md menu"
     >
       <div class="container mx-auto flex justify-between items-center logo">
-        <h1
-          class="text-white text-xl font-bold glow-background drop-shadow-[0_0_10px_rgb(59,130,246)]"
-        >
-          UE I<sup>3</sup>
-        </h1>
+        <h1 class="text-white text-xl font-bold">UE I<sup>3</sup></h1>
         <button id="menu-btn" class="md:hidden text-white text-2xl">☰</button>
         <ul id="menu" class="hidden md:flex space-x-4 text-[#00fefe] text-sm">
           <li>
