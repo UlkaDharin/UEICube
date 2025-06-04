@@ -28,6 +28,14 @@
         margin: 0 auto;
         padding: 0 15px;
       }
+      .logo-img {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        width: 40px; /* Adjust as needed */
+        height: auto; /* Maintains aspect ratio */
+        z-index: 50;
+      }
       .logo h1,
       sup {
         font-size: 1.8rem;
@@ -355,7 +363,12 @@
       class="fixed top-0 left-0 w-full z-10 bg-transparent p-4 backdrop-blur-md menu"
     >
       <div class="container mx-auto flex justify-between items-center logo">
-        <h1 class="text-white text-xl font-bold">UE I<sup>3</sup></h1>
+        <!-- <h1 class="text-white text-xl font-bold">UE I<sup>3</sup></h1> -->
+        <img
+          src="assets/images/company-logo.jpeg"
+          class="logo-img"
+          alt="logo"
+        />
         <button id="menu-btn" class="md:hidden text-white text-2xl">☰</button>
         <ul id="menu" class="hidden md:flex space-x-4 text-[#00fefe] text-sm">
           <li>
